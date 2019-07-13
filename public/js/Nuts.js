@@ -18,32 +18,30 @@ class Nuts {
         let nut = this.group.create(x, y, 'nut')
         nut.setDisplaySize(50 * 1.15, 50)
         nut.body.angularVelocity = -100
-        nut.falling = false
+        nut.tighten = false
 
         nut.setInteractive().on('pointerover', () => {
-            if(!nut.falling) {
-                nut.body.angularVelocity = this.wrenchSpeed - this.fallSpeed
-            }
+            nut.tighten = true
         });
 
         nut.setInteractive().on('pointerout', () => {
-            if(!nut.falling) {
-                nut.body.angularVelocity = -this.fallSpeed
-            }
+            nut.tighten = false
         });
     }
 
     update() {
+        self = this
         Phaser.Actions.Call(this.group.getChildren(), (nut) => {
-            if(nut.displayWidth > 100) {
-                nut.falling = true
+            if(nut.displayWidth > 200) {
                 nut.body.angularVelocity = 0
                 let newHeight = nut.body.height + 50
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
-                if(nut.displayWidth > 2000) {
+                if(nut.displayWidth > 1500) {
                     nut.destroy()
+                    self.fallSpeed+=75
                 }
             } else {
+                nut.body.angularVelocity = (nut.tighten ? self.wrenchSpeed : 0) - this.fallSpeed
                 let newHeight = nut.body.height - nut.body.angularVelocity *0.001
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
             }
