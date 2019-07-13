@@ -8,6 +8,7 @@ class Nuts {
     create() {
         this.group = this.scene.physics.add.group({})
         this.add(250, 250)
+        this.add(100, 100)
     }
 
     add(x, y) {
@@ -16,15 +17,17 @@ class Nuts {
         nut.body.angularVelocity = -100
         nut.spinning = false
 
-        nut.setInteractive().on('pointerdown', () => {
-            if(!nut.spinning) {
+        nut.setInteractive().on('pointerover', () => {
                 nut.body.angularVelocity = 100
                 nut.spinning = true
-            } else {
-                nut.body.angularVelocity = -100
-                nut.spinning = false
-            } }
+            }
+
         );
+
+        nut.setInteractive().on('pointerout', () => {
+            nut.body.angularVelocity = -100
+            nut.spinning = false
+        });
     }
 
     update() {
