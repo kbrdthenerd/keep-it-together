@@ -9,9 +9,17 @@ class Nuts {
 
     create() {
         this.group = this.scene.physics.add.group({})
-        this.add(250, 250)
-        this.add(200, 200)
         this.add(100, 100)
+        this.add(300, 100)
+        this.add(500, 100)
+
+        this.add(100, 300)
+        this.add(300, 300)
+        this.add(500, 300)
+
+        this.add(100, 500)
+        this.add(300, 500)
+        this.add(500, 500)
     }
 
     add(x, y) {
@@ -38,7 +46,7 @@ class Nuts {
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
                 if(nut.displayWidth > 1500) {
                     nut.destroy()
-                    self.fallSpeed+=75
+                    self.fallSpeed+=15
                 }
             } else {
                 nut.body.angularVelocity = (nut.tighten ? self.wrenchSpeed : 0) - this.fallSpeed
