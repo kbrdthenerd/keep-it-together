@@ -46,7 +46,13 @@ class Nuts {
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
                 if(nut.displayWidth > 1500) {
                     nut.destroy()
-                    self.fallSpeed+=15
+                    self.fallSpeed+=13
+                    if(self.group.getChildren().length === 0) {
+                        const years = Math.floor(self.scene.timePassed / 100)
+                        const days = Math.floor((self.scene.timePassed / 100 - years) * 365)
+                        self.scene.end = new Text(self.scene, `You lost it after ${years} years and ${days} days`, 70, 210, '25px', false, 0.008)
+                        self.scene.end.startFadeIn()
+                    }
                 }
             } else {
                 nut.body.angularVelocity = (nut.tighten ? self.wrenchSpeed : 0) - this.fallSpeed
