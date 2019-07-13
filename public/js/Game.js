@@ -1,8 +1,8 @@
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-game',
-    width: 500,
-    height: 500,
+    width: 750,
+    height: 750,
     backgroundColor: 0x004455,
     scene: [GamePlay]
 }

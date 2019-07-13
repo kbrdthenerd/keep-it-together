@@ -20,5 +20,6 @@ class GamePlay extends Phaser.Scene {
     }
 
     update() {
+        this.nuts.update()
     }
 }

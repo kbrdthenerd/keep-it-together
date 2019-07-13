@@ -12,9 +12,30 @@ class Nuts {
 
     add(x, y) {
         let nut = this.group.create(x, y, 'nut')
-        nut.body.angularVelocity = 50
+        nut.setDisplaySize(50 * 1.15, 50)
+        nut.body.angularVelocity = -100
+        nut.spinning = false
+
+        nut.setInteractive().on('pointerdown', () => {
+            if(!nut.spinning) {
+                nut.body.angularVelocity = 100
+                nut.spinning = true
+            } else {
+                nut.body.angularVelocity = -100
+                nut.spinning = false
+            } }
+        );
     }
 
     update() {
+        Phaser.Actions.Call(this.group.getChildren(), (nut) => {
+            if(!nut.spinning) {
+                let newHeight = nut.body.height + 0.05
+                nut.setDisplaySize(newHeight * 1.15, newHeight)
+            } else {
+                let newHeight = nut.body.height - 0.1
+                nut.setDisplaySize(newHeight * 1.15, newHeight)
+            }
+        })
     }
 }
