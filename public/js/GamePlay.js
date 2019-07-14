@@ -50,8 +50,8 @@ class GamePlay extends Phaser.Scene {
     }
 
     endGame() {
-        const years = Math.floor(this.timePassed / 100)
-        const days = Math.floor((this.timePassed / 100 - years) * 365)
+        const years = Math.floor(this.timePassed / 50)
+        const days = Math.floor((this.timePassed / 50 - years) * 365)
         this.end = new Text(this, `You kept it together for ${years} years and ${days} days`, 10, 210, '25px', false, 0.008)
         this.end.startFadeIn()
         this.tryAgain = new Text(this, `Try again?`, 150, 300, '25px', false, 0.008)
