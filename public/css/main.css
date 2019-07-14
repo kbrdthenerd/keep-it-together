@@ -1,3 +1,4 @@
-body {
+body, html {
     cursor: url(../assets/wrench.png), pointer;
+    background-color: #FFFFFF;
 }

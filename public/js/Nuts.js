@@ -2,11 +2,13 @@ class Nuts {
     constructor(scene) {
         this.scene = scene
         this.scene.load.image('nut', 'assets/nut.png')
+        this.scene.load.image('bolt', 'assets/bolt.png')
 
     }
 
     create() {
         this.group = this.scene.physics.add.group({})
+        this.bolts = this.scene.physics.add.group({})
         this.fallSpeed = 50
         this.wrenchSpeed = 150
 
@@ -25,7 +27,13 @@ class Nuts {
 
     add(x, y, color) {
         let nut = this.group.create(x, y, 'nut')
-        nut.setDisplaySize(50 * 1.15, 50)
+        let bolt = this.bolts.create(x, y, 'bolt')
+        let innerBolt = this.bolts.create(x, y, 'bolt')
+        bolt.setDisplaySize(57, 57)
+        innerBolt.setDisplaySize(50, 50)
+        bolt.setTint(0xb3b3b3)
+        innerBolt.setTint(0x999999)
+        nut.setDisplaySize(60 * 1.15, 60)
         nut.body.angularVelocity = -100
         nut.tighten = false
         nut.setTint(color)
@@ -42,7 +50,8 @@ class Nuts {
     update() {
         self = this
         Phaser.Actions.Call(this.group.getChildren(), (nut) => {
-            if(nut.displayHeight > 150) {
+            if(nut.displayHeight > 100) {
+                nut.depth = 5
                 nut.body.angularVelocity = 0
                 let newHeight = nut.body.height + 50
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
@@ -53,7 +62,7 @@ class Nuts {
                         self.scene.endGame()
                     }
                 }
-            } else if(self.wrenchSpeed > self.fallSpeed && nut.tighten && nut.displayHeight < 50) {
+            } else if(self.wrenchSpeed > self.fallSpeed && nut.tighten && nut.displayHeight < 60) {
                 nut.body.angularVelocity = 0
             } else {
                 nut.body.angularVelocity = (nut.tighten ? self.wrenchSpeed : 0) - this.fallSpeed
