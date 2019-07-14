@@ -14,15 +14,15 @@ class Nuts {
 
         this.add(100, 100, 0xA4036F, 60)
         this.add(300, 100, 0x048BA8, 70)
-        this.add(500, 100, 0xF29E4C, 65)
+        this.add(500, 100, 0xF29E4C, 60)
 
         this.add(100, 300, 0xC12447, 75)
-        this.add(300, 300, 0x16DB93, 85)
-        this.add(500, 300, 0xEFEA5A, 90)
+        this.add(300, 300, 0x16DB93, 65)
+        this.add(500, 300, 0xEFEA5A, 80)
 
-        this.add(100, 500, 0x343E3D, 60)
-        this.add(300, 500, 0xFFB5CA, 80)
-        this.add(500, 500, 0x654321, 95)
+        this.add(100, 500, 0x343E3D, 70)
+        this.add(300, 500, 0xFFB5CA, 65)
+        this.add(500, 500, 0x654321, 60)
     }
 
     add(x, y, color, startSize) {
@@ -66,7 +66,7 @@ class Nuts {
                 nut.body.angularVelocity = 0
             } else {
                 nut.body.angularVelocity = (nut.tighten ? self.wrenchSpeed : 0) - this.fallSpeed
-                let newHeight = nut.body.height - nut.body.angularVelocity *0.001
+                let newHeight = nut.body.height - nut.body.angularVelocity *0.0005
                 nut.setDisplaySize(newHeight * 1.15, newHeight)
             }
         })
