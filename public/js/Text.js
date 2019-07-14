@@ -9,8 +9,7 @@ class Text {
         this.sceneText.depth = 10
         this.fadeInRate = fadeInRate
 
-        this.sceneText.setStroke('#004455', 5)
-        this.sceneText.setShadow(2, 2, '#ffffff', 2, true, false)
+        this.sceneText.setStroke('#000000', 5)
 
     }
 

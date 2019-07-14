@@ -23,7 +23,7 @@ class GamePlay extends Phaser.Scene {
         WebFont.load({
           active: () => {
                  self.title = new Text(self, 'Keep it Together', 70, 140, '60px', true, 0.008)
-                  self.credit = new Text(self, 'Designed by Katherine Brennan', 70, 210, '25px', true, 0.008)
+                  self.credit = new Text(self, 'by Katherine Brennan', 70, 210, '25px', true, 0.008)
                   self.title.startFadeIn()
                   self.credit.startFadeIn()
               },
@@ -47,5 +47,30 @@ class GamePlay extends Phaser.Scene {
             this.tryAgain.update()
         }
         this.nuts.update()
+    }
+
+    endGame() {
+        const years = Math.floor(this.timePassed / 100)
+        const days = Math.floor((this.timePassed / 100 - years) * 365)
+        this.end = new Text(this, `You kept it together for ${years} years and ${days} days`, 10, 210, '25px', false, 0.008)
+        this.end.startFadeIn()
+        this.tryAgain = new Text(this, `Try again?`, 150, 300, '25px', false, 0.008)
+        this.tryAgain.startFadeIn()
+        this.tryAgain.sceneText.setInteractive().on('pointerdown', () => {
+            this.end.sceneText.destroy()
+            this.tryAgain.sceneText.destroy()
+            this.nuts.create()
+            this.timePassed = 0
+        })
+
+        this.tryAgain.sceneText.setInteractive().on('pointerover', () => {
+            this.tryAgain.sceneText.setStroke('#16DB93', 5)
+
+        })
+
+        this.tryAgain.sceneText.setInteractive().on('pointerout', () => {
+            this.tryAgain.sceneText.setStroke('#000000', 5)
+
+        })
     }
 }

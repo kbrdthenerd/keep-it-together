@@ -1,14 +1,3 @@
 body {
-    background-color: #004455;
     cursor: url(../assets/wrench.png), pointer;
-}
-
-#game {
-    width: 600px;
-    border-style: solid;
-    border-color: #b5d8e0;
-    border-width: 10px;
-}
-#phaser-game {
-    width: 600px
 }

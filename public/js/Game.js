@@ -3,7 +3,7 @@ var config = {
     parent: 'phaser-game',
     width: 600,
     height: 600,
-    backgroundColor: 0x004455,
+    backgroundColor: 0xFFFFFF,
     scene: [GamePlay]
 }
 
