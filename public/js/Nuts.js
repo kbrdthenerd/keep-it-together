@@ -12,20 +12,20 @@ class Nuts {
         this.fallSpeed = 50
         this.wrenchSpeed = 150
 
-        this.add(100, 100, 0xA4036F)
-        this.add(300, 100, 0x048BA8)
-        this.add(500, 100, 0xF29E4C)
+        this.add(100, 100, 0xA4036F, 60)
+        this.add(300, 100, 0x048BA8, 70)
+        this.add(500, 100, 0xF29E4C, 65)
 
-        this.add(100, 300, 0xC12447)
-        this.add(300, 300, 0x16DB93)
-        this.add(500, 300, 0xEFEA5A)
+        this.add(100, 300, 0xC12447, 75)
+        this.add(300, 300, 0x16DB93, 85)
+        this.add(500, 300, 0xEFEA5A, 90)
 
-        this.add(100, 500, 0x343E3D)
-        this.add(300, 500, 0xFFB5CA)
-        this.add(500, 500, 0x654321)
+        this.add(100, 500, 0x343E3D, 60)
+        this.add(300, 500, 0xFFB5CA, 80)
+        this.add(500, 500, 0x654321, 95)
     }
 
-    add(x, y, color) {
+    add(x, y, color, startSize) {
         let nut = this.group.create(x, y, 'nut')
         let bolt = this.bolts.create(x, y, 'bolt')
         let innerBolt = this.bolts.create(x, y, 'bolt')
@@ -33,7 +33,7 @@ class Nuts {
         innerBolt.setDisplaySize(50, 50)
         bolt.setTint(0xb3b3b3)
         innerBolt.setTint(0x999999)
-        nut.setDisplaySize(60 * 1.15, 60)
+        nut.setDisplaySize(startSize * 1.15, startSize)
         nut.body.angularVelocity = -100
         nut.tighten = false
         nut.setTint(color)
