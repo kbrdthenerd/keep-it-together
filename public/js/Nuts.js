@@ -2,13 +2,14 @@ class Nuts {
     constructor(scene) {
         this.scene = scene
         this.scene.load.image('nut', 'assets/nut.png')
-        this.fallSpeed = 50
-        this.wrenchSpeed = 150
 
     }
 
     create() {
         this.group = this.scene.physics.add.group({})
+        this.fallSpeed = 50
+        this.wrenchSpeed = 150
+
         this.add(100, 100)
         this.add(300, 100)
         this.add(500, 100)
@@ -50,8 +51,26 @@ class Nuts {
                     if(self.group.getChildren().length === 0) {
                         const years = Math.floor(self.scene.timePassed / 100)
                         const days = Math.floor((self.scene.timePassed / 100 - years) * 365)
-                        self.scene.end = new Text(self.scene, `You lost it after ${years} years and ${days} days`, 70, 210, '25px', false, 0.008)
+                        self.scene.end = new Text(self.scene, `You kept it together for ${years} years and ${days} days`, 30, 210, '25px', false, 0.008)
                         self.scene.end.startFadeIn()
+                        self.scene.tryAgain = new Text(self.scene, `Try again?`, 150, 300, '25px', false, 0.008)
+                        self.scene.tryAgain.startFadeIn()
+                        self.scene.tryAgain.sceneText.setInteractive().on('pointerdown', () => {
+                            self.scene.end.sceneText.destroy()
+                            self.scene.tryAgain.sceneText.destroy()
+                            self.scene.nuts.create()
+                            self.scene.timePassed = 0
+                        })
+
+                        self.scene.tryAgain.sceneText.setInteractive().on('pointerover', () => {
+                            self.scene.tryAgain.sceneText.setStroke('#0000FF', 5)
+
+                        })
+
+                        self.scene.tryAgain.sceneText.setInteractive().on('pointerout', () => {
+                            self.scene.tryAgain.sceneText.setStroke('#004455', 5)
+
+                        })
                     }
                 }
             } else {

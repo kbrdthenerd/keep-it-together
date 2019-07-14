@@ -43,6 +43,9 @@ class GamePlay extends Phaser.Scene {
         if(this.end) {
             this.end.update()
         }
+        if(this.tryAgain) {
+            this.tryAgain.update()
+        }
         this.nuts.update()
     }
 }
