@@ -12,20 +12,40 @@ class Nuts {
         this.fallSpeed = 50
         this.wrenchSpeed = 150
 
-        this.add(100, 100, 0xA4036F, 60)
-        this.add(300, 100, 0x048BA8, 70)
-        this.add(500, 100, 0xF29E4C, 60)
+        this.add(100, 100, 0xA4036F, 0x5BFC90, 60)
+        this.add(300, 100, 0x048BA8, 0xFB7457, 70)
+        this.add(500, 100, 0xF29E4C, 0x0D61B3, 60)
 
-        this.add(100, 300, 0xC12447, 75)
-        this.add(300, 300, 0x16DB93, 65)
-        this.add(500, 300, 0xEFEA5A, 80)
+        this.add(100, 300, 0xC12447, 0x3EDBB8, 75)
+        this.add(300, 300, 0x16DB93, 0xE9246C, 65)
+        this.add(500, 300, 0xEFEA5A, 0x1015A5, 80)
 
-        this.add(100, 500, 0x343E3D, 70)
-        this.add(300, 500, 0xFFB5CA, 65)
-        this.add(500, 500, 0x654321, 60)
+        this.add(100, 500, 0x343E3D, 0xCBC1C2, 70)
+        this.add(300, 500, 0xFFB5CA, 0x004A35, 65)
+        this.add(500, 500, 0x654321, 0x9ABCDE, 60)
+        this.timedEvent = this.scene.time.addEvent({ delay: 0, callback: this.invert, callbackScope: this, repeat: 0});
+
     }
 
-    add(x, y, color, startSize) {
+    invert() {
+        Phaser.Actions.Call(this.group.getChildren(), (nut) => {
+            if(nut.displayHeight > 90) {
+                if(nut.currentColor == nut.inverse) {
+                    nut.currentColor = nut.color
+                    nut.setTint(nut.color)
+                } else {
+                    nut.currentColor = nut.inverse
+                    nut.setTint(nut.inverse)
+                }
+            } else {
+                nut.currentColor = nut.color
+                nut.setTint(nut.color)
+            }
+        })
+       this.timedEvent.reset({ delay: 300, callback: this.invert, callbackScope: this, repeat: 1})
+    }
+
+    add(x, y, color, invertColor, startSize) {
         let nut = this.group.create(x, y, 'nut')
         let bolt = this.bolts.create(x, y, 'bolt')
         let innerBolt = this.bolts.create(x, y, 'bolt')
@@ -37,6 +57,10 @@ class Nuts {
         nut.body.angularVelocity = -100
         nut.tighten = false
         nut.setTint(color)
+        nut.currentColor = color
+        nut.color = color
+        nut.inverse = invertColor
+        nut.flashing = false
 
         nut.setInteractive().on('pointerover', () => {
             nut.tighten = true
